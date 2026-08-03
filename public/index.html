@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Kamel Ride — Funnel Analytics</title>
+  <style>
+    * { box-sizing: border-box; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: #f5f6f8;
+      color: #1a1a1a;
+      margin: 0;
+      padding: 40px 24px;
+    }
+
+    main { max-width: 760px; margin: 0 auto; }
+
+    h1 { font-size: 22px; margin: 0 0 4px; }
+
+    .subtitle { color: #6b7280; font-size: 14px; margin: 0 0 32px; }
+
+    h2 {
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: #6b7280;
+      margin: 32px 0 12px;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      gap: 12px;
+    }
+
+    .card {
+      background: #fff;
+      border: 1px solid #e5e7eb;
+      border-radius: 8px;
+      padding: 18px;
+    }
+
+    .value { font-size: 30px; font-weight: 600; line-height: 1.1; }
+
+    .label { font-size: 13px; color: #6b7280; margin-top: 6px; }
+
+    .funnel .card { border-left: 3px solid #2563eb; }
+
+    .rate .value { color: #2563eb; }
+
+    footer { margin-top: 32px; font-size: 13px; color: #9ca3af; }
+
+    button {
+      font: inherit;
+      padding: 8px 14px;
+      border: 1px solid #d1d5db;
+      background: #fff;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+
+    button:hover { background: #f9fafb; }
+  </style>
+</head>
+<body>
+  <main>
+    <h1>Kamel Ride — Funnel Analytics</h1>
+    <p class="subtitle">Internal dashboard. Counts are computed from raw events at read time.</p>
+
+    <h2>Volume</h2>
+    <div class="grid">
+      <div class="card">
+        <div class="value" id="totalEvents">–</div>
+        <div class="label">Total events</div>
+      </div>
+      <div class="card">
+        <div class="value" id="uniqueUsers">–</div>
+        <div class="label">Unique users</div>
+      </div>
+    </div>
+
+    <h2>Funnel</h2>
+    <div class="grid funnel">
+      <div class="card">
+        <div class="value" id="searched">–</div>
+        <div class="label">Searched a route</div>
+      </div>
+      <div class="card">
+        <div class="value" id="viewed">–</div>
+        <div class="label">Viewed a ride</div>
+      </div>
+      <div class="card">
+        <div class="value" id="booked">–</div>
+        <div class="label">Booked a ride</div>
+      </div>
+    </div>
+
+    <h2>Conversion</h2>
+    <div class="grid rate">
+      <div class="card">
+        <div class="value"><span id="searchToView">–</span>%</div>
+        <div class="label">Search → View</div>
+      </div>
+      <div class="card">
+        <div class="value"><span id="viewToBook">–</span>%</div>
+        <div class="label">View → Book</div>
+      </div>
+    </div>
+
+    <footer>
+      <button id="refresh">Refresh</button>
+    </footer>
+  </main>
+
+  <script>
+    async function loadStats() {
+      const res = await fetch("/stats");
+      const stats = await res.json();
+      
+      document.getElementById("totalEvents").textContent = stats.totalEvents;
+      document.getElementById("uniqueUsers").textContent = stats.uniqueUsers;
+      document.getElementById("searched").textContent = stats.searched;
+      document.getElementById("viewed").textContent = stats.viewed;
+      document.getElementById("booked").textContent = stats.booked;
+      document.getElementById("searchToView").textContent = stats.searchToView;
+      document.getElementById("viewToBook").textContent = stats.viewToBook;
+    }
+
+    document.getElementById("refresh").addEventListener("click", loadStats);
+    loadStats();
+  </script>
+</body>
+</html>

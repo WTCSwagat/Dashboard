@@ -1,0 +1,26 @@
+{
+  "name": "kamel-analytics",
+  "version": "1.0.0",
+  "description": "Ride-event analytics API and dashboard",
+  "main": "src/server.ts",
+  "scripts": {
+    "start": "tsx src/server.ts",
+    "simulate": "tsx src/simulator.ts",
+    "typecheck": "tsc --noEmit",
+    "dev": "nodemon --exec tsx src/server.ts"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "module",
+  "dependencies": {
+    "express": "^5.2.1"
+  },
+  "devDependencies": {
+    "@types/express": "^5.0.6",
+    "@types/node": "^26.1.2",
+    "nodemon": "^3.1.14",
+    "tsx": "^4.23.1",
+    "typescript": "^7.0.2"
+  }
+}
