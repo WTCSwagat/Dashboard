@@ -1,4 +1,4 @@
-# Kamel Analytics
+#Analytics
 
 An internal funnel-analytics dashboard for a rideshare product. A simulator generates
 fake user sessions and POSTs them as raw events; an Express server ingests them and
