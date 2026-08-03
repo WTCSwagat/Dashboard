@@ -1,13 +1,9 @@
-#Analytics
+
 
 An internal funnel-analytics dashboard for a rideshare product. A simulator generates
 fake user sessions and POSTs them as raw events; an Express server ingests them and
 computes funnel metrics at read time; a plain HTML dashboard displays the numbers.
 
-Not a booking app — it shows how users move through the booking funnel and where they
-drop off.
-
-```
 simulator  ──POST /events──►  server (in-memory)  ──GET /stats──►  dashboard
 ```
 
@@ -18,7 +14,6 @@ npm install
 npm run start      # terminal 1 — API + dashboard on :3000
 npm run simulate   # terminal 2 — generates 50 fake sessions
 ```
-
 Open [localhost:3000](http://localhost:3000) and click **Refresh**. Storage is
 in-memory, so restarting the server clears all events.
 
