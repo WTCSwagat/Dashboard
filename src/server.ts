@@ -41,6 +41,10 @@ app.get("/stats", (req, res) => {
     });
 
 
+app.get("/events", (req, res) => {
+  res.json(events);
+});
+
 app.listen(3000, () => console.log("listening on 3000"));
 
 

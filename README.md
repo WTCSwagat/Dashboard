@@ -24,8 +24,8 @@ If that errors or shows an older version, install from [nodejs.org](https://node
 ### 1. Clone and install
 
 ```bash
-git clone https://github.com/<your-username>/kamel-analytics.git
-cd kamel-analytics
+git clone https://github.com/WTCSwagat/Dashboard.git
+cd Dashboard
 npm install
 ```
 
