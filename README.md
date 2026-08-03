@@ -11,16 +11,74 @@ drop off.
 simulator  ──POST /events──►  server (in-memory)  ──GET /stats──►  dashboard
 ```
 
-## Run
+## Getting started
+
+You need **Node.js v20 or newer**. Check with:
 
 ```bash
-npm install
-npm run start      # terminal 1 — API + dashboard on :3000
-npm run simulate   # terminal 2 — generates 50 fake sessions
+node -v
 ```
 
-Open [localhost:3000](http://localhost:3000) and click **Refresh**. Storage is
-in-memory, so restarting the server clears all events.
+If that errors or shows an older version, install from [nodejs.org](https://nodejs.org).
+
+### 1. Clone and install
+
+```bash
+git clone https://github.com/<your-username>/kamel-analytics.git
+cd kamel-analytics
+npm install
+```
+
+### 2. Start the server — terminal 1
+
+```bash
+npm run start
+```
+
+Leave this running. You should see:
+
+```
+listening on 3000
+```
+
+### 3. Open the dashboard
+
+Go to **[http://localhost:3000](http://localhost:3000)**. Every number shows `–`,
+because no events exist yet.
+
+### 4. Generate events — terminal 2
+
+Open a **second** terminal in the same folder:
+
+```bash
+npm run simulate
+```
+
+This creates 50 fake user sessions and POSTs roughly 100 events to the server. It
+exits when finished.
+
+### 5. Refresh
+
+Click **Refresh** on the dashboard. The dashes become numbers.
+
+Run `npm run simulate` again and refresh to watch the totals climb. Storage is
+in-memory, so restarting the server clears everything.
+
+### Checking it from the command line
+
+```bash
+curl -s localhost:3000/stats    # the aggregated numbers
+curl -s localhost:3000/events   # the raw event log
+```
+
+### If something goes wrong
+
+| Problem | Cause |
+|---|---|
+| `EADDRINUSE` on start | Port 3000 is taken. `lsof -ti:3000 \| xargs kill -9` |
+| Dashboard shows `–` forever | Server isn't running, or step 4 was skipped |
+| `npm run simulate` fails to connect | The server in terminal 1 isn't running |
+| Numbers look doubled | Old events are still in memory; restart the server |
 
 ## The event
 

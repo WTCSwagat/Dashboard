@@ -1,3 +1,5 @@
+import type { RideEvent } from "./types.js";
+
 export const routes = [
     { pickup: "Boston, MA", dropoff: "New York, NY" },
     { pickup: "New York, NY", dropoff: "Philadelphia, PA" },
